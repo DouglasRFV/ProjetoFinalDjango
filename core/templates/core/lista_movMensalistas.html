@@ -2,7 +2,10 @@
 
 <ul>
     {% for movMensalista in movMensalistas %}
-        <li> {{movMensalista.mensalista.veiculo}} - {{movMensalista.dt_pgto}} - {{movMensalista.total}} </li>
+        <li>    
+            <a href="{% url 'core_movMensalista_update' movMensalista.id %}">
+            {{movMensalista.mensalista.veiculo}} - {{movMensalista.dt_pgto}} - {{movMensalista.total}}</a><br>
+        </li>
     {% endfor %}
 </ul>
 
