@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from .models import (
     Pessoa, 
     Veiculo, 
@@ -14,12 +15,13 @@ from .forms import (
     MovMensalistaForm
 )
 
+@login_required(login_url='/accounts/login/')
 def home(request):
     context = {'mensagem': 'Olá Mundo!'}
     return render(request, 'core/index.html', context)
 
 #===========================PESSOAS==================================
-
+@login_required(login_url='/accounts/login/')
 def lista_pessoas(request):
     pessoas = Pessoa.objects.all()
     form = PessoaForm()
@@ -27,6 +29,7 @@ def lista_pessoas(request):
     return render(request, 'core/lista_pessoas.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def pessoa_novo(request):
     form = PessoaForm(request.POST or None)
     if form.is_valid():
@@ -34,6 +37,7 @@ def pessoa_novo(request):
     return redirect('core_lista_pessoas')
 
 
+@login_required(login_url='/accounts/login/')
 def pessoa_update(request, id):
     data = {}
     pessoa = Pessoa.objects.get(id=id)
@@ -49,6 +53,7 @@ def pessoa_update(request, id):
         return render(request, 'core/update_pessoa.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def pessoa_delete(request, id):
     pessoa = Pessoa.objects.get(id=id)
     if request.method == 'POST':
@@ -61,6 +66,7 @@ def pessoa_delete(request, id):
 #===========================VEÍCULOS==================================
 
 
+@login_required(login_url='/accounts/login/')
 def lista_veiculos(request):
     veiculos = Veiculo.objects.all()
     form = VeiculoForm()
@@ -68,6 +74,7 @@ def lista_veiculos(request):
     return render(request, 'core/lista_veiculos.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def veiculo_novo(request):
     form = VeiculoForm(request.POST or None)
     if form.is_valid():
@@ -75,6 +82,7 @@ def veiculo_novo(request):
     return redirect('core_lista_veiculos')
 
 
+@login_required(login_url='/accounts/login/')
 def veiculo_update(request, id):
     data = {}
     veiculo = Veiculo.objects.get(id=id)
@@ -90,6 +98,7 @@ def veiculo_update(request, id):
         return render(request, 'core/update_veiculo.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def veiculo_delete(request, id):
     veiculo = Veiculo.objects.get(id=id)
     if request.method == 'POST':
@@ -102,6 +111,7 @@ def veiculo_delete(request, id):
 #===========================MOVIMENTO ROTATIVOS==================================
 
 
+@login_required(login_url='/accounts/login/')
 def lista_movRotativos(request):
     movRotativos = MovRotativo.objects.all()
     form = MovRotativoForm()
@@ -109,6 +119,7 @@ def lista_movRotativos(request):
     return render(request, 'core/lista_movRotativos.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def movRotativo_novo(request):
     form = MovRotativoForm(request.POST or None)
     if form.is_valid():
@@ -116,6 +127,7 @@ def movRotativo_novo(request):
     return redirect('core_lista_movRotativos')
 
 
+@login_required(login_url='/accounts/login/')
 def movRotativo_update(request, id):
     data = {}
     movRotativo = MovRotativo.objects.get(id=id)
@@ -131,6 +143,7 @@ def movRotativo_update(request, id):
         return render(request, 'core/update_movRotativo.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def movRotativo_delete(request, id):
     movRotativo = MovRotativo.objects.get(id=id)
     if request.method == 'POST':
@@ -143,6 +156,7 @@ def movRotativo_delete(request, id):
 #===========================MENSALISTAS==================================
 
 
+@login_required(login_url='/accounts/login/')
 def lista_mensalistas(request):
     mensalistas = Mensalista.objects.all()
     form = MensalistaForm()
@@ -150,6 +164,7 @@ def lista_mensalistas(request):
     return render(request, 'core/lista_mensalistas.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def mensalista_novo(request):
     form = MensalistaForm(request.POST or None)
     if form.is_valid():
@@ -157,6 +172,7 @@ def mensalista_novo(request):
     return redirect('core_lista_mensalistas')
 
 
+@login_required(login_url='/accounts/login/')
 def mensalista_update(request, id):
     data = {}
     mensalista = Mensalista.objects.get(id=id)
@@ -172,6 +188,7 @@ def mensalista_update(request, id):
         return render(request, 'core/update_mensalista.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def mensalista_delete(request, id):
     mensalista = Mensalista.objects.get(id=id)
     if request.method == 'POST':
@@ -184,6 +201,7 @@ def mensalista_delete(request, id):
 #===========================MOVIMENTO MENSALISTAS==================================
 
 
+@login_required(login_url='/accounts/login/')
 def lista_movMensalistas(request):
     movMensalistas = MovMensalista.objects.all()
     form = MovMensalistaForm()
@@ -191,6 +209,7 @@ def lista_movMensalistas(request):
     return render(request, 'core/lista_movMensalistas.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def movMensalistas_novo(request):
     form = MovMensalistaForm(request.POST or None)
     if form.is_valid():
@@ -198,6 +217,7 @@ def movMensalistas_novo(request):
     return redirect('core_lista_movMensalistas')
 
 
+@login_required(login_url='/accounts/login/')
 def movMensalista_update(request, id):
     data = {}
     movMensalista = MovMensalista.objects.get(id=id)
@@ -213,6 +233,7 @@ def movMensalista_update(request, id):
         return render(request, 'core/update_movMensalista.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def movMensalista_delete(request, id):
     movMensalista = MovMensalista.objects.get(id=id)
     if request.method == 'POST':
